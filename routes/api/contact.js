@@ -35,19 +35,21 @@ router.delete('/:id', (req, res) => {
 })
 
 
-//@ route UPDATE api/todo
-//@desc UPDATE a Todo
+//@ route UPDATE api/user
+//@desc UPDATE a User
 //@access Public
 router.put('/:id', (req, res) => {
-  const found = Todo.some(todo => todo.id === parseInt(req.params.id))
+  const found = USER.some(user => user.id === parseInt(req.params.id))
   if(found) {
-    const updTodo = req.body
-    Todo.forEach(todo => {
-      if(todo.id === parseInt(req.params.id)) {
-        todo.name = updTodo.name ? updTodo.name : todo.name
-        res.json({ msg: 'Task was updated', todo })      
+    const updUser = req.body
+    Todo.forEach(user => {
+      if(user.id === parseInt(req.params.id)) {
+        user.name = updUser.name ? updUser.name : user.name
+        user.email = updUser.email ? updUser.email : user.email
+        user.address = updUser.address ? updUser.address : user.address
+        res.json({ msg: 'User was updated', user })      
       } else {
-        res.status(400).json({ms: `No task with the id of ${req.params.id}`})
+        res.status(400).json({ms: `No user with the id of ${req.params.id}`})
       }
     })
   }
